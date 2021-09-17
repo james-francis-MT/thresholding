@@ -1,7 +1,8 @@
 const sharp = require("sharp");
+const thresholdArray = require("./thresholdImageArray");
 
-convertImageToBuffer = async () => {
-    const { data, info } = await sharp("grey.png")
+module.exports = async () => {
+    const { data, info } = await sharp("colour.jpg")
         .resize(256, 256)
         .greyscale()
         .raw()
@@ -9,13 +10,17 @@ convertImageToBuffer = async () => {
 
     const pixelArray = new Uint8ClampedArray(data.buffer);
 
-    console.log(pixelArray);
+    const { width, height, channels } = info;
+    await sharp(pixelArray, {
+        raw: { width, height, channels },
+    }).toFile("grey.jpg");
+
+    const normalArray = Array.from(pixelArray);
+    const thresholdedArray = thresholdArray(normalArray);
+    console.log(new Uint8ClampedArray(thresholdedArray));
 
     // When you are done changing the pixelArray, sharp takes the `pixelArray` as an input
-    const { width, height, channels } = info;
-    await sharp(pixelArray, { raw: { width, height, channels } }).toFile(
-        "my-changed-image.jpg"
-    );
+    await sharp(new Uint8ClampedArray(thresholdedArray), {
+        raw: { width, height, channels },
+    }).toFile("my-changed-image.jpg");
 };
-
-convertImageToBuffer();
