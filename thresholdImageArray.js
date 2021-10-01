@@ -58,7 +58,7 @@ const setPixels = (arr, x0, y0, x1, y1, threshold) => {
     }
 };
 
-module.exports = (arr) => {
+export default (arr) => {
     arr = reshapeArray(arr, ARRAY_WIDTH);
     const m = calculateMean(arr);
     for (let i = 0; i < ARRAY_WIDTH / WINDOW_SIZE; i++) {
