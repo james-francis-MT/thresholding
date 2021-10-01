@@ -17,7 +17,6 @@ module.exports = async () => {
 
     const normalArray = Array.from(pixelArray);
     const thresholdedArray = await thresholdArray(normalArray);
-    console.log(new Uint8ClampedArray(thresholdedArray));
 
     // When you are done changing the pixelArray, sharp takes the `pixelArray` as an input
     await sharp(new Uint8ClampedArray(thresholdedArray), {
