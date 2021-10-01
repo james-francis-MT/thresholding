@@ -1,6 +1,6 @@
 const WINDOW_SIZE = 16;
 const K = 0.2;
-const R = 125;
+const R = 128;
 const ARRAY_WIDTH = 256;
 const ARRAY_HEIGHT = 256;
 
@@ -58,7 +58,7 @@ const setPixels = (arr, x0, y0, x1, y1, threshold) => {
     }
 };
 
-export default (arr) => {
+module.exports = async (arr) => {
     arr = reshapeArray(arr, ARRAY_WIDTH);
     const m = calculateMean(arr);
     for (let i = 0; i < ARRAY_WIDTH / WINDOW_SIZE; i++) {

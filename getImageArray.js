@@ -16,7 +16,7 @@ module.exports = async () => {
     }).toFile("grey.jpg");
 
     const normalArray = Array.from(pixelArray);
-    const thresholdedArray = thresholdArray(normalArray);
+    const thresholdedArray = await thresholdArray(normalArray);
     console.log(new Uint8ClampedArray(thresholdedArray));
 
     // When you are done changing the pixelArray, sharp takes the `pixelArray` as an input
